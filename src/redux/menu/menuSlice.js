@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  open: false,
+  opened: false,
 };
 
 const menuSlice = createSlice({
   name: "menu",
   initialState,
   reducers: {
-    opened: (state, actions) => {
-      state.open = actions.payload;
+    open: (state, actions) => {
+      state.opened = actions.payload;
     },
   },
 });

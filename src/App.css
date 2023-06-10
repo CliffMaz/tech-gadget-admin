@@ -5,4 +5,18 @@
 
 .App{
   display: flex;
+  flex-direction: column;
+  width: 100vh;
+}
+
+
+
+.wrapper{
+  display: flex;
+  width: 100vw;
+}
+
+.wrapper-content{
+
+  width: 100%;
 }
