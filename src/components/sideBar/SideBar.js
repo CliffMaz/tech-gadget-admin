@@ -55,6 +55,11 @@ const SideBar = () => {
             <ShoppingCartOutlinedIcon /> <p>Orders</p>
           </div>
         </Link>
+        <Link style={{ textDecoration: "none", color: "#ffff" }} to="/orders">
+          <div className="sidebar-btn">
+            <ShoppingCartOutlinedIcon /> <p>Products</p>
+          </div>
+        </Link>
         <div className="sidebar-bottom"></div>
       </div>
       <div className="sidebar-btn">
