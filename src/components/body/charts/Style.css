@@ -1,0 +1,17 @@
+.chart {
+  box-shadow: 1px 1px 3px 2px rgb(174, 172, 172);
+  width: 40%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  -o-object-fit: cover;
+     object-fit: cover;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+.chart div {
+  margin: 0;
+  width: -moz-max-content;
+  width: max-content;
+}/*# sourceMappingURL=Style.css.map */

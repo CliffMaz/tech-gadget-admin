@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SideBar.scss";
 import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -8,6 +8,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import store from "../../redux/store/store";
 import { menuActions } from "../../redux/menu/menuSlice";
+import { getUsers } from "../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 const SideBar = () => {
@@ -47,9 +48,15 @@ const SideBar = () => {
         <div className="sidebar-btn">
           <AttachMoneyOutlinedIcon /> <p>Sales</p>
         </div>
-        <div className="sidebar-btn">
-          <GroupsOutlinedIcon /> <p>Customers</p>
-        </div>
+        <Link
+          style={{ textDecoration: "none", color: "#ffff" }}
+          to="/customers"
+        >
+          <div className="sidebar-btn" onClick={() => dispatch(getUsers())}>
+            <GroupsOutlinedIcon /> <p>Customers</p>
+          </div>
+        </Link>
+
         <Link style={{ textDecoration: "none", color: "#ffff" }} to="/orders">
           <div className="sidebar-btn">
             <ShoppingCartOutlinedIcon /> <p>Orders</p>
