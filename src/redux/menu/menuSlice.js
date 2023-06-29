@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   opened: false,
+
+  customerView: false,
 };
 
 const menuSlice = createSlice({
@@ -10,6 +12,12 @@ const menuSlice = createSlice({
   reducers: {
     open: (state, actions) => {
       state.opened = actions.payload;
+    },
+    customerOpen: (state) => {
+      state.customerView = true;
+    },
+    customerClose: (state) => {
+      state.customerView = false;
     },
   },
 });

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./Customer.scss";
 import Customer from "./Customer";
 import Table from "../Table/Table";
-import { userActions, getUsers } from "../../../redux/user/userSlice";
+import { getUsers } from "../../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const columns = [
@@ -39,12 +39,12 @@ const Customers = () => {
   const dispatch = useDispatch();
   // dispatch(getUsers());
   const users = useSelector((state) => state.user.users);
-
+  let customerView = useSelector((state) => state.customer.customerView);
+  console.log("cus: ", customerView);
   useEffect(() => {
-    dispatch(getUsers);
-    console.log("rendered");
-  }, [dispatch]);
-  console.log("u", users);
+    dispatch(getUsers());
+  });
+
   const filteredUsers = users.map((user) => {
     return {
       id: user._id,
@@ -55,10 +55,10 @@ const Customers = () => {
     };
   });
 
-  console.log(filteredUsers);
   const rows = filteredUsers;
   return (
-    <div className="customers" onLoadStart={() => console.log("loaded")}>
+    <div className="customers">
+      {customerView && <Customer />}
       <h1>Customers</h1>
       <Table column={columns} row={rows} />
     </div>

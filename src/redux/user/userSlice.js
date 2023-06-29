@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  userData: { name: "cliford", surname: "Mazibuko" },
+  userData: { username: "cliford Mazibuko", profileDisplay: "adsfew" },
   users: [],
   pending: false,
   successfull: false,
@@ -11,7 +11,7 @@ const initialState = {
 
 const getUsers = createAsyncThunk("user/getUsers", async () => {
   const res = await axios.get(`http://localhost:4001/api/user/all`);
-  console.log("thunk", res.data);
+
   return res.data;
 });
 

@@ -7,10 +7,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { customerActions } from "../../../redux/customer/customerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import store from "../../../redux/store/store";
 
 export default function StickyHeadTable({ column, row }) {
   const columns = column;
 
+  const dispatch = useDispatch();
   const rows = row;
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -18,11 +22,13 @@ export default function StickyHeadTable({ column, row }) {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const x = store.getState().customer;
 
-  const handleClick = (id) => {
-    alert(id);
+  const handleCustomerView = (user) => {
+    dispatch(customerActions.setCustomer(user));
+
+    dispatch(customerActions.customerOpen());
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -61,7 +67,8 @@ export default function StickyHeadTable({ column, row }) {
                     key={row.id}
                     onClick={(e) => {
                       e.preventDefault();
-                      handleClick(row.customerId);
+                      console.log("table: ", row);
+                      handleCustomerView(row);
                     }}
                   >
                     {columns.map((column) => {
