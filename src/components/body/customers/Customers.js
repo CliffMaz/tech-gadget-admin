@@ -40,7 +40,7 @@ const Customers = () => {
   // dispatch(getUsers());
   const users = useSelector((state) => state.user.users);
   let customerView = useSelector((state) => state.customer.customerView);
-  console.log("cus: ", customerView);
+
   useEffect(() => {
     dispatch(getUsers());
   });

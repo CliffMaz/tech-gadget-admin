@@ -15,11 +15,6 @@ const SideBar = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.menu.opened);
 
-  console.log("init state: ", store.getState());
-  //dispatch(menuActions.opened(true));
-  //store.dispatch(menuActions.opened(true));
-  console.log("final: ", store.getState().menu.opened);
-  console.log(isOpen);
   const [sideBar, setSideBar] = useState(store.getState().menu.opened);
 
   const handleClose = () => {

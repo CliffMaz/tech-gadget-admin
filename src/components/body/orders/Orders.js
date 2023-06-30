@@ -1,60 +1,76 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Orders.scss";
-import Table from "../Table/Table";
+import OrderTable from "../Table/OrderTable";
+import { getOrders } from "../../../redux/order/orderSlice";
+import { useDispatch, useSelector } from "react-redux";
+import EditIcon from "@mui/icons-material/Edit";
 
 const Orders = () => {
+  const dispatch = useDispatch();
+  const orders = useSelector((state) => state.order.orders);
+
+  let orderView = useSelector((state) => state.order.orderView);
+  useEffect(() => {
+    dispatch(getOrders());
+  }, [dispatch]);
+
+  const filteredOrders = orders.map((order) => {
+    return {
+      id: order._id,
+      orderStatus: order.orderStatus,
+      totalPrice: "R" + order.totalPrice,
+      paidAt: order.paidAt,
+      action: (
+        <>
+          <EditIcon />
+        </>
+      ),
+    };
+  });
+
   const columns = [
-    { id: "customerId", label: "Customer ID", minWidth: 170 },
-    { id: "name", label: "Name", minWidth: 100 },
+    { id: "id", label: "Order ID", minWidth: 170 },
     {
-      id: "username",
-      label: "Username",
-      minWidth: 170,
+      id: "orderStatus",
+      label: "Order Status",
+      minWidth: 100,
+      render: (rowData) => (rowData.mode ? "True" : "False"),
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "totalPrice",
+      label: "Total Price",
+      minWidth: 200,
       align: "right",
       format: (value) => value.toLocaleString("en-US"),
     },
     {
-      id: "email",
-      label: "Size\u00a0(km\u00b2)",
-      minWidth: 170,
+      id: "paidAt",
+      label: "Payment Date",
+      minWidth: 200,
       align: "right",
       format: (value) => value.toLocaleString("en-US"),
     },
+
     {
-      id: "role",
-      label: "Role",
-      minWidth: 170,
+      id: "action",
+      label: "Action",
+      minWidth: 200,
       align: "right",
       format: (value) => value.toFixed(2),
     },
   ];
 
-  function createData(customerId, name, username, email, role) {
-    return { customerId, name, username, email, role };
+  function createData(id, paid, totalPrice, paidAt, action) {
+    return { id, paid, totalPrice, paidAt, action };
   }
 
-  const rows = [
-    createData("132", "India", 1324171354, 3287263),
-    createData("123", "CN", 1403500365, 9596961),
-    createData("244", "Italy", 60483973, 301340),
-    createData("154", "USA", 327167434, 9833520),
-    createData("127", "Canada", 37602103, 9984670),
-    createData("676", "Australia", 25475400, 7692024),
-    createData("346", "Denmark", 83019200, 357578),
-    createData("23", "Ireland", 4857000, 70273),
-    createData("2", "Mexico", 126577691, 1972550),
-    createData("763", "Japan", 126317000, 377973),
-    createData("233", "France", 67022000, 640679),
-    createData("700", "United Kingdom", 67545757, 242495),
-    createData("12", "Russia", 146793744, 17098246),
-    createData("15", "Nigeria", 200962417, 923768),
-    createData("4", "Brazil", 210147125, 8515767),
-  ];
+  const rows = filteredOrders;
 
   return (
     <div className="orders">
       <h1>Orders</h1>
-      <Table column={columns} row={rows} />
+      <OrderTable column={columns} row={rows} />
     </div>
   );
 };

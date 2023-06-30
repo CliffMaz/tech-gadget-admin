@@ -13,7 +13,6 @@ const Header = () => {
   const dispatch =useDispatch();
 const user = useSelector((state)=> state.user.userData)
 
-console.log(user);
   const handleOpen =()=>{
     dispatch(menuActions.open(!store.getState().menu.opened))
   }
