@@ -60,7 +60,7 @@ const SideBar = () => {
             <ShoppingCartOutlinedIcon /> <p>Orders</p>
           </div>
         </Link>
-        <Link style={{ textDecoration: "none", color: "#ffff" }} to="/orders">
+        <Link style={{ textDecoration: "none", color: "#ffff" }} to="/products">
           <div className="sidebar-btn">
             <ShoppingCartOutlinedIcon /> <p>Products</p>
           </div>

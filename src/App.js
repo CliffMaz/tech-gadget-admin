@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Settings from "./components/body/settings/Settings";
 import Login from "./components/Login";
+import Products from "./components/body/products/Products";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/sales" element={<Sales />} />
                 <Route path="/customers" element={<Customers />} />
                 <Route path="/sales" element={<Sales />} />
+                <Route path="/products" element={<Products />} />
                 <Route path="/settings" element={<Settings />} />
               </Routes>
             </div>

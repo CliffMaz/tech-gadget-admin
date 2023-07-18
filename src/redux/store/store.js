@@ -3,6 +3,7 @@ import { menuReducer } from "../menu/menuSlice";
 import { usersReducer } from "../user/userSlice";
 import { customerReducer } from "../customer/customerSlice";
 import { orderReducer } from "../order/orderSlice";
+import { productReducer } from "../product/productSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     user: usersReducer,
     customer: customerReducer,
     order: orderReducer,
+    product: productReducer,
   },
 });
 
