@@ -2,12 +2,25 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
+  isLoggedIn: true,
   userData: { username: "cliford Mazibuko", profileDisplay: "adsfew" },
   users: [],
   pending: false,
   successfull: false,
   error: false,
 };
+
+const login = createAsyncThunk("user/login", async (user) => {
+  const res = await axios.get(`http://localhost:4001/api/auth/login`, user);
+
+  return res.data;
+});
+
+const verify = createAsyncThunk("user/verify", async (user) => {
+  const res = await axios.get(`http://localhost:4001/api/auth/verify`, user);
+
+  return res.data;
+});
 
 const getUsers = createAsyncThunk("user/getUsers", async () => {
   const res = await axios.get(`http://localhost:4001/api/user/all`);
@@ -45,4 +58,4 @@ const userSlice = createSlice({
 const userActions = userSlice.actions;
 const usersReducer = userSlice.reducer;
 
-export { userActions, usersReducer, getUsers };
+export { userActions, usersReducer, getUsers, login, verify };

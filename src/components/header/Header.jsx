@@ -4,23 +4,30 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import store from "../../redux/store/store";
 import { menuActions } from "../../redux/menu/menuSlice";
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, redirect, useNavigate } from 'react-router-dom';
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
 
 const Header = () => {
 
   const dispatch =useDispatch();
+  const navigate= useNavigate();
 const user = useSelector((state)=> state.user.userData)
-
-  const handleOpen =()=>{
-    dispatch(menuActions.open(!store.getState().menu.opened))
+const isLoggedIn =useSelector((state)=>state.user.isLoggedIn);
+  const handleOpen =()=>{if(isLoggedIn){
+            dispatch(menuActions.open(!store.getState().menu.opened))
+          }else{
+            navigate("/");
+          }
+    
   }
   return (
     <div className='header'>
         <div className='menu-icon' onClick={(e)=> { 
           e.preventDefault();
-          handleOpen()} } >
+          
+          handleOpen()
+          } } >
             <MenuOutlinedIcon/>
         </div>
         <div className='menu-search'>
@@ -28,6 +35,7 @@ const user = useSelector((state)=> state.user.userData)
             <button>Search</button>
         </div>
         <div className='menu-profile'>
+          { isLoggedIn ?
         <div className="loggedInUser">
                 <img src={user?.profileDisplay} alt="" />
                 Hi, {user.username}
@@ -80,6 +88,7 @@ const user = useSelector((state)=> state.user.userData)
                   </div>
                 </div>
               </div>
+              :<h3>Login</h3>}
         </div>
     </div>
   )

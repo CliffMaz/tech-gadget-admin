@@ -34,7 +34,10 @@ const SideBar = () => {
       </div>
       <h4 className="">Tech-Gadget</h4>
       <div className="sidebar-top">
-        <Link style={{ textDecoration: "none", color: "#ffff" }} to="/">
+        <Link
+          style={{ textDecoration: "none", color: "#ffff" }}
+          to="/dashboard"
+        >
           <div className="sidebar-btn">
             <DashboardCustomizeOutlinedIcon /> <p>Dashboard</p>
           </div>

@@ -4,6 +4,7 @@ import Customer from "./Customer";
 import Table from "../Table/Table";
 import { getUsers } from "../../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const columns = [
   { id: "id", label: "Customer ID", minWidth: 170 },
@@ -37,8 +38,15 @@ function createData(id, fullname, username, email, role) {
 
 const Customers = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   // dispatch(getUsers());
   const users = useSelector((state) => state.user.users);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+  if (!isLoggedIn) {
+    navigate("/");
+  }
+
   let customerView = useSelector((state) => state.customer.customerView);
 
   useEffect(() => {
