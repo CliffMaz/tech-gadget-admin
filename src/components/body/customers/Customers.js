@@ -51,7 +51,7 @@ const Customers = () => {
 
   useEffect(() => {
     dispatch(getUsers());
-  });
+  }, [dispatch]);
 
   const filteredUsers = users.map((user) => {
     return {

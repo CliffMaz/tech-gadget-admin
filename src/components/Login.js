@@ -1,48 +1,43 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Login.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { login } from "../redux/user/userSlice";
 
 const Login = () => {
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+
+  const dispatch = useDispatch();
+
+  const handleLogin = () => {
+    dispatch(
+      login({
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      })
+    );
+  };
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  console.log(isLoggedIn);
+
   if (isLoggedIn) {
     navigate("/dashboard");
   }
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignContent: "center",
-        background: "red",
-        minHeight: "100vh",
-      }}
-    >
-      <div id="login-form-wrap">
-        <h2>Login</h2>
-        <form id="login-form">
-          <p>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Username"
-              required
-            />
-            <i className="validation">
-              <span></span>
-              <span></span>
-            </i>
-          </p>
+    <div className="login-page">
+      <div className="login-right">
+        <h2>Welcome to the Admin Page Please Login</h2>
+        <form className="login-form" id="login-form">
           <p>
             <input
               type="email"
               id="email"
               name="email"
-              placeholder="Email Address"
+              placeholder="Email"
               required
+              ref={emailRef}
             />
             <i className="validation">
               <span></span>
@@ -50,15 +45,34 @@ const Login = () => {
             </i>
           </p>
           <p>
-            <input type="submit" id="login" value="Login" />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              required
+              ref={passwordRef}
+            />
+            <i className="validation">
+              <span></span>
+              <span></span>
+            </i>
+          </p>
+          <p>
+            <input
+              className="submit"
+              type="submit"
+              id="login"
+              value="Login"
+              onClick={(e) => {
+                e.preventDefault();
+                handleLogin();
+              }}
+            />
           </p>
         </form>
-        <div id="create-account-wrap">
-          <p>
-            Not a member? <a href="#">Create Account</a>
-          </p>
-        </div>
       </div>
+      <div className="login-left"></div>
     </div>
   );
 };

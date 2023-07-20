@@ -8,15 +8,15 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import store from "../../redux/store/store";
 import { menuActions } from "../../redux/menu/menuSlice";
-import { getUsers } from "../../redux/user/userSlice";
+import { getUsers, userActions } from "../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const SideBar = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.menu.opened);
 
   const [sideBar, setSideBar] = useState(store.getState().menu.opened);
-
+  const navigate = useNavigate();
   const handleClose = () => {
     dispatch(menuActions.open(false));
   };
@@ -67,10 +67,21 @@ const SideBar = () => {
         </Link>
         <div className="sidebar-bottom"></div>
       </div>
-      <div className="sidebar-btn">
-        <SettingsOutlinedIcon /> <p>Settings</p>
-      </div>
-      <div className="sidebar-btn">
+      <Link style={{ textDecoration: "none", color: "#ffff" }} to="/settings">
+        <div className="sidebar-btn">
+          <SettingsOutlinedIcon /> <p>Settings</p>
+        </div>
+      </Link>
+      <div
+        className="sidebar-btn"
+        onClick={(e) => {
+          e.preventDefault();
+          dispatch(menuActions.open(false));
+          dispatch(userActions.logOut());
+
+          navigate("/");
+        }}
+      >
         <LogoutOutlinedIcon /> <p>Sign Out</p>
       </div>
     </div>

@@ -12,7 +12,7 @@ const Header = () => {
 
   const dispatch =useDispatch();
   const navigate= useNavigate();
-const user = useSelector((state)=> state.user.userData)
+const user = useSelector((state)=> state.user.userData.user)
 const isLoggedIn =useSelector((state)=>state.user.isLoggedIn);
   const handleOpen =()=>{if(isLoggedIn){
             dispatch(menuActions.open(!store.getState().menu.opened))

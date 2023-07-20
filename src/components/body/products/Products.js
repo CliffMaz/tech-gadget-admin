@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const columns = [
-  { id: "id", label: "Product ID", minWidth: 200 },
+  { id: "id", label: "Product ID", minWidth: 20 },
 
   {
     id: "pname",
@@ -65,7 +65,7 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-  });
+  }, [dispatch]);
 
   const filteredProducts = products.map((product) => {
     return {

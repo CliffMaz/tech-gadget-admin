@@ -4,13 +4,20 @@ import OrderTable from "../Table/OrderTable";
 import { getOrders } from "../../../redux/order/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.order.orders);
 
   let orderView = useSelector((state) => state.order.orderView);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const navigate = useNavigate();
+
   useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/");
+    }
     dispatch(getOrders());
   }, [dispatch]);
 
