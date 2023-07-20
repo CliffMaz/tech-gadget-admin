@@ -12,12 +12,8 @@ function Settings() {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const [file, setFile] = useState(null);
-  const navigate = Navigate();
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-  if (!isLoggedIn) {
-    navigate("/");
-  }
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userData.user);
@@ -99,7 +95,7 @@ function Settings() {
   };
 
   return (
-    <section className="settings">
+    <section className="settings-b">
       <h2>Settings</h2>
 
       <form
