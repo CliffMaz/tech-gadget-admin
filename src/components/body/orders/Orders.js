@@ -5,6 +5,7 @@ import { getOrders } from "../../../redux/order/orderSlice";
 import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
+import Order from "./Order";
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -25,8 +26,11 @@ const Orders = () => {
     return {
       id: order._id,
       orderStatus: order.orderStatus,
-      totalPrice: "R" + order.totalPrice,
+      totalPrice: "$" + order.totalPrice,
       paidAt: order.paidAt,
+      isPaid: order.isPaid,
+      orderBy: order.orderBy,
+      shippingAddress: order.shippingAddress,
       action: (
         <>
           <EditIcon />
@@ -34,7 +38,7 @@ const Orders = () => {
       ),
     };
   });
-
+  console.log(" date: ", filteredOrders);
   const columns = [
     { id: "id", label: "Order ID", minWidth: 170 },
     {
@@ -78,6 +82,7 @@ const Orders = () => {
     <div className="orders">
       <h1>Orders</h1>
       <OrderTable column={columns} row={rows} />
+      {orderView && <Order />}
     </div>
   );
 };

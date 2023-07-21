@@ -25,7 +25,7 @@ export default function StickyHeadTable({ column, row }) {
   const handleOrderView = (order) => {
     dispatch(orderActions.setOrder(order));
 
-    dispatch(order.orderOpen());
+    dispatch(orderActions.orderOpen());
   };
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);

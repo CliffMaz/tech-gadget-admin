@@ -6,6 +6,7 @@
   height: 100vh;
 }
 
+//customer view
 .customer {
   position: absolute;
   top: 55%;
@@ -18,4 +19,43 @@
   z-index: 999;
   width: 70vw;
   min-height: 80vh;
+
+  .customer-close {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+
+    .close {
+      color: red;
+      font-size: 30px;
+    }
+  }
+
+  .cust {
+    display: flex;
+    height: 100%;
+
+    .cust-left {
+      width: 50%;
+      min-height: 76vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+      }
+    }
+
+    .cust-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: left;
+      margin-left: 50px;
+    }
+  }
 }

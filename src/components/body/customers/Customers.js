@@ -5,6 +5,7 @@ import Table from "../Table/Table";
 import { getUsers } from "../../../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const columns = [
   { id: "id", label: "Customer ID", minWidth: 170 },
@@ -60,6 +61,8 @@ const Customers = () => {
       username: user.username,
       email: user.email,
       role: user.role,
+      profileDisplay: user.profileDisplay,
+      createdAt: user.createdAt,
     };
   });
 
@@ -69,6 +72,9 @@ const Customers = () => {
       {customerView && <Customer />}
       <h1>Customers</h1>
       <Table column={columns} row={rows} />
+      <div>
+        <Button>ADD PRODUCT</Button>
+      </div>
     </div>
   );
 };
