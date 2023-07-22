@@ -31,6 +31,7 @@ const Orders = () => {
       isPaid: order.isPaid,
       orderBy: order.orderBy,
       shippingAddress: order.shippingAddress,
+      orderItems: order.orderItems,
       action: (
         <>
           <EditIcon />

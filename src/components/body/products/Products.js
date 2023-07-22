@@ -5,6 +5,9 @@ import ProductTable from "../Table/ProductTable";
 import { getProducts } from "../../../redux/product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { Button } from "@mui/material";
 
 const columns = [
   { id: "id", label: "Product ID", minWidth: 20 },
@@ -44,6 +47,13 @@ const columns = [
     align: "right",
     format: (value) => value.toFixed(2),
   },
+  {
+    id: "action",
+    label: "Actions",
+    minWidth: 30,
+    align: "right",
+    format: (value) => value.toFixed(2),
+  },
 ];
 
 function createData(id, fullname, username, email, role) {
@@ -77,6 +87,12 @@ const Products = () => {
       img: (
         <img style={{ width: "150px", height: "150px" }} src={product.img} />
       ),
+      action: (
+        <>
+          <EditIcon />
+          <DeleteForeverIcon color="error" />
+        </>
+      ),
     };
   });
 
@@ -86,6 +102,14 @@ const Products = () => {
     <div className="customers">
       {productView && <img />}
       <h1>Products</h1>
+      <div className="product-btns">
+        <div className="product-search">
+          <input type="text" placeholder="Search" />
+        </div>
+        <Button variant="outlined" color="success">
+          ADD NEW PRODUCT
+        </Button>
+      </div>
       <ProductTable column={columns} row={rows} />
     </div>
   );
