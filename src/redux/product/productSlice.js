@@ -25,7 +25,7 @@ const productSlice = createSlice({
     productOpen: (state) => {
       state.productView = true;
     },
-    orderClose: (state) => {
+    productClose: (state) => {
       state.productView = false;
     },
   },

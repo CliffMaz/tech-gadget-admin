@@ -28,11 +28,6 @@ export default function StickyHeadTable({ column, row }) {
     setPage(newPage);
   };
 
-  const handleOrderView = (product) => {
-    dispatch(productActions.setOrder(product));
-
-    dispatch(product.orderOpen());
-  };
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);

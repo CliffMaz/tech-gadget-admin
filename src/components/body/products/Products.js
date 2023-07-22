@@ -2,12 +2,16 @@ import React, { useEffect } from "react";
 import "./Products.scss";
 //import Customer from "./Customer";
 import ProductTable from "../Table/ProductTable";
-import { getProducts } from "../../../redux/product/productSlice";
+import {
+  getProducts,
+  productActions,
+} from "../../../redux/product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { Button } from "@mui/material";
+import Product from "./Product";
 
 const columns = [
   { id: "id", label: "Product ID", minWidth: 20 },
@@ -65,13 +69,12 @@ const Products = () => {
   const navigate = useNavigate();
   // dispatch(getUsers());
   const products = useSelector((state) => state.product.products);
+  const productView = useSelector((state) => state.product.productView);
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   if (!isLoggedIn) {
     navigate("/");
   }
-
-  let productView = useSelector((state) => state.product.productView);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -84,13 +87,22 @@ const Products = () => {
       price: product.price,
       stockQuantity: product.stockQuantity,
       pDesc: product.pDesc,
+      image: product.img,
       img: (
         <img style={{ width: "150px", height: "150px" }} src={product.img} />
       ),
       action: (
         <>
           <EditIcon />
-          <DeleteForeverIcon color="error" />
+          <div
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(productActions.productOpen());
+              dispatch(productActions.setProducts(product));
+            }}
+          >
+            <DeleteForeverIcon color="error" />
+          </div>
         </>
       ),
     };
@@ -111,6 +123,7 @@ const Products = () => {
         </Button>
       </div>
       <ProductTable column={columns} row={rows} />
+      {productView && <Product />}
     </div>
   );
 };
