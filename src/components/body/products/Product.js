@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { productActions } from "../../../redux/product/productSlice";
+import {
+  getProducts,
+  productActions,
+} from "../../../redux/product/productSlice";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
@@ -8,16 +11,24 @@ import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 const Product = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.productInfo);
-
-  const [user, setUser] = useState("");
-  const fullnameRef = useRef("");
-  const usernameRef = useRef("");
-  const emailRef = useRef("");
-  const passwordRef = useRef("");
+  console.log("clifff", product);
+  //const [user, setUser] = useState("");
+  const user = useSelector((state) => state.user.userData.user);
+  const token = useSelector((state) => state.user.userData.token);
+  console.log(token);
+  const pnameRef = useRef("");
+  const pDescRef = useRef("");
+  const priceRef = useRef("");
   const [file, setFile] = useState(null);
-  let toUpdateUser = { ...user, password: "" };
+  let toUpdateProduct = {
+    _id: product.id,
+    pname: product.pname,
+    pDesc: product.pDesc,
+    price: product.price,
+    stockQuantity: product.stockQuantity,
+    img: product.image,
+  };
 
-  const token = "";
   const notifySuccess = (succ) => {
     toast.success(`🦄 ${succ}`, {
       position: "bottom-center",
@@ -43,34 +54,37 @@ const Product = () => {
       theme: "light",
     });
   };
-  const handleSubmit = (e) => {
+  const handleUpdate = (e) => {
     e.preventDefault();
-    if (fullnameRef.current.value !== "") {
-      toUpdateUser = {
-        ...toUpdateUser,
-        fullname: fullnameRef.current.value,
+    if (pnameRef.current.value !== "") {
+      toUpdateProduct = {
+        ...toUpdateProduct,
+        pname: pnameRef.current.value,
       };
     }
-    if (usernameRef.current.value !== "") {
-      toUpdateUser = { ...toUpdateUser, username: usernameRef.current.value };
+    if (pDescRef.current.value !== "") {
+      toUpdateProduct = {
+        ...toUpdateProduct,
+        pDesc: pDescRef.current.value,
+      };
     }
-    if (emailRef.current.value !== "") {
-      toUpdateUser = {
-        ...toUpdateUser,
-        email: emailRef.current.value,
+    if (priceRef.current.value !== "") {
+      toUpdateProduct = {
+        ...toUpdateProduct,
+        price: priceRef.current.value,
       };
     }
     if (file !== null) {
-      toUpdateUser = {
-        ...toUpdateUser,
-        profileDisplay: file,
+      toUpdateProduct = {
+        ...toUpdateProduct,
+        img: file,
       };
     }
-
+    console.log("cl", toUpdateProduct);
     axios
       .put(
-        `http://localhost:4001/api/user/update`,
-        toUpdateUser,
+        `http://localhost:4001/api/product/update`,
+        toUpdateProduct,
 
         {
           headers: {
@@ -82,7 +96,8 @@ const Product = () => {
         }
       )
       .then((res) => {
-        setUser(res.data.ne);
+        dispatch(productActions.setProducts(res.data));
+        dispatch(getProducts());
         notifySuccess("Profile updated successfully");
       })
       .catch((err) => {
@@ -105,19 +120,19 @@ const Product = () => {
       </div>
       <div className="edit-product">
         <section className="settings">
-          <h2>Settings</h2>
+          <h2>Product Detials</h2>
 
           <form
             className="updated-form"
             encType="multipart/form-data"
-            onSubmit={handleSubmit}
+            onSubmit={handleUpdate}
           >
             <div className="form-contents">
               <div className="updated-left">
                 <div>
                   <label>Product Name</label>
                   <input
-                    ref={fullnameRef}
+                    ref={pnameRef}
                     type="text"
                     placeholder="Product Name"
                     defaultValue={product.pname}
@@ -130,7 +145,7 @@ const Product = () => {
                     id=""
                     cols="30"
                     data-min-rows="5"
-                    ref={usernameRef}
+                    ref={pDescRef}
                     type="text"
                     placeholder="Product Description"
                     defaultValue={product.pDesc}
@@ -139,7 +154,7 @@ const Product = () => {
                 <div>
                   <label>Price</label>
                   <input
-                    ref={emailRef}
+                    ref={priceRef}
                     type="text"
                     placeholder="Price"
                     defaultValue={product.price}
