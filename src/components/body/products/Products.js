@@ -109,7 +109,7 @@ const Products = () => {
   });
 
   const rows = filteredProducts;
-  console.log("data n", rows);
+
   return (
     <div className="customers">
       {productView && <img />}

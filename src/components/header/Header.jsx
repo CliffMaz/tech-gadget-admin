@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, redirect, useNavigate } from 'react-router-dom';
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
+import { userActions } from '../../redux/user/userSlice';
 
 const Header = () => {
 
@@ -56,7 +57,7 @@ const isLoggedIn =useSelector((state)=>state.user.isLoggedIn);
                         alignContent: "center",
                         alignItems: "center",
                       }}
-                      to="/profile/orders"
+                      to="/settings"
                     >
                       <p>
                         <ManageAccountsOutlinedIcon />
@@ -77,8 +78,10 @@ const isLoggedIn =useSelector((state)=>state.user.isLoggedIn);
                       <p
                         onClick={(e) => {
                           e.preventDefault();
-                          //setUser((prev) => (prev = undefined));
-                          //localStorage.clear();
+                          dispatch(menuActions.open(false));
+                          dispatch(userActions.logOut());
+                
+                          navigate("/");
                         }}
                       >
                         <LoginOutlinedIcon />

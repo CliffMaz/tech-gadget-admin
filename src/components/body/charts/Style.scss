@@ -1,7 +1,7 @@
 .chart {
   box-shadow: 1px 1px 3px 2px rgb(174, 172, 172);
   width: 40%;
-  height: 500px;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   object-fit: cover;

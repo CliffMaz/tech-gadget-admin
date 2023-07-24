@@ -2,8 +2,10 @@
   //max-width: 30rem;
   color: white;
   background-color: black;
-  height: 100vh;
-  width: 20rem;
+  min-height: 100vh;
+  //height: 100vh;
+
+  //width: 20rem;
   position: sticky;
   top: 0;
   z-index: 222;
@@ -14,31 +16,31 @@
     justify-content: flex-end;
     cursor: pointer;
     h2 {
-      padding: 10px;
+      padding: 0.5rem;
     }
   }
   h4 {
-    font-size: 33px;
-    padding: 10px;
-    margin: 80px 50px;
+    font-size: 2rem;
+    padding: 0.5rem;
+    margin: 3rem 2rem;
   }
 
   .sidebar-top {
     border-bottom: 1px solid rgb(45, 45, 45);
-    padding-bottom: 40px;
+    padding-bottom: 2rem;
   }
   .sidebar-btn {
     display: flex;
     align-items: center;
-    font-size: 22px;
-    height: 35px;
-    margin: 10px;
-    padding: 10px;
+    font-size: 1rem;
+    height: 2rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
     background-color: rgb(24, 24, 26);
-    border-radius: 2px;
+    border-radius: 0.2rem;
 
     p {
-      padding-left: 10px;
+      padding-left: 0.5rem;
     }
   }
 

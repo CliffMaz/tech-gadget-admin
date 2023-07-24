@@ -1,7 +1,9 @@
 *{
   margin: 0;
   padding: 0;
+  
 }
+
 
 .App{
   display: flex;
@@ -30,9 +32,12 @@
 		width: 530px !important; 
 	} 
 }
+
 @media (min-width: 866px) {
+  
 	.discovery-stream.ds-layout {
 		width: 786px !important; 
+    
 	} 
 }
 @media (min-width: 1122px) {

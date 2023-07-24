@@ -11,11 +11,10 @@ import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 const Product = () => {
   const dispatch = useDispatch();
   const product = useSelector((state) => state.product.productInfo);
-  console.log("clifff", product);
-  //const [user, setUser] = useState("");
+
   const user = useSelector((state) => state.user.userData.user);
   const token = useSelector((state) => state.user.userData.token);
-  console.log(token);
+
   const pnameRef = useRef("");
   const pDescRef = useRef("");
   const priceRef = useRef("");
@@ -80,7 +79,6 @@ const Product = () => {
         img: file,
       };
     }
-    console.log("cl", toUpdateProduct);
     axios
       .put(
         `http://localhost:4001/api/product/update`,
